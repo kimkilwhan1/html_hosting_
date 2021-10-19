@@ -1,26 +1,73 @@
-<div style=" height:350px; border:5px solid rgb(0, 0, 0); float:left; margin-left:100px; margin-right:100px;">
-    <img src="전자레인지1.png" height="350" width=350 alt="테스트이미지" />
+<html>
+  
+  <head>
+    <script>
+      const img_p="image/";
+
+
+    </script>
+    <style>
+    #left_image{
+      border:5px solid black;
+
+      height:100%;
+      width:50%;
+
+      position:relative;
+      float:left;
+      box-sizing: border-box;
+    }
+
+    #right_image{
+      border:5px solid black;
+
+      height:100%;
+      width:50%;
+
+      position:relative;
+      float:left;
+      box-sizing: border-box;
+    }
+    
+    button.btn1 {
+      position:absolute;
+      top:50%;
+      left:70%;
+
+      width:20%;
+      height:10%;
+
+      font-size:large;
+    }
+    button.btn2 {
+      position:absolute;
+      top:70%;
+      left:70%;
+
+      width:20%;
+      height:10%;
+
+      font-size:large;
+    }
+
+    </style>
+
+  </head>
+  
+  <div id="left_image">
+  
+    <img src="이미지/전자레인지.png" style="height:100%; width:100%; object-fit:cover;"/>
+
   </div>
-  <div id="testImg">
-    <img src="냉장고1.jpg" height="350" width=350 alt="테스트이미지" />
+
+  <div id="right_image">
+  
+    <img src="이미지/냉장고1.jpg" style="height:100%; width:100%; object-fit:cover;"/>
+
     <button class="btn1" type="button" onclick="javascript:sensorBtnClick('btn1');">더 크게</button>
     <button class="btn2" type="button" onclick="javascript:sensorBtnClick('btn2');">더 작게</button>
+
   </div>
-  <style>
-  #testImg{
-    postiion : relative;
-    height:350px;
-    float: left;
-    border:5px solid rgb(0, 0, 0);
-  }
-  button.btn1 {
-    position: absolute;
-    top: 170px;
-    left : 135px; 
-  }
-  button.btn2 {
-    position: absolute;
-    top: 300px;
-    left : 135px;
-  }
-  </style>
+
+
+</html>
