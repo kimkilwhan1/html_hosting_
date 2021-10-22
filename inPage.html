@@ -1,22 +1,7 @@
 <html>
   
   <head>
-    <script>
-      const img_p="이미지/";
-      var image=[];
-      var src=[];
-      var carbon=[];
-
-      function sensorBtnClick(s){
-        if(s=='bigger'){
-
-        }
-        if(s=='smaller'){
-
-        }
-      }
-
-    </script>
+    
     <style>
     #left_image{
       border:5px solid black;
@@ -67,18 +52,108 @@
   
   <div id="left_image">
   
-    <img src="이미지/전자기기/백열전구.jpg" style="height:100%; width:100%; object-fit:contain;"/>
+    <img id="l_img" src="이미지/전자기기/백열전구.jpg" style="height:100%; width:100%; object-fit:contain;"/>
 
   </div>
 
   <div id="right_image">
   
-    <img src="이미지/음식/김치찌개.jpg" style="height:100%; width:100%; object-fit:contain;"/>
+    <img id="r_img" src="이미지/음식/김치찌개.jpg" style="height:100%; width:100%; object-fit:contain;"/>
 
     <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');">더 크게</button>
     <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');">더 작게</button>
 
   </div>
+  <script>
+    function shuffle(n){//n=length
+      let arr=[];
+      for(let i in arr)
+      arr[i]=-1;
 
+      for(let i=0; i<n; i++){
+        let rand=Math.floor(Math.random()*n);//0~length-1
+
+        arr[i]=rand;
+        for(let j=0; j<i; j++)
+        if(rand==arr[j]){
+         
+          arr[i]=-1;
+          i--;
+          break;}
+
+      }
+
+      console.log(arr);
+      return arr;
+    }
+
+    const List="전자기기/냉장고.png/전기냉장고 700L 기준 냉장기능 1시간 사용/44g\n\
+전자기기/냉장고.png/전기냉동고 200L 기준 냉동기능 1시간 사용/50g\n\
+전자기기/김치냉장고.jpg/김치냉장고 200L 기준 1시간 사용/50g\n\
+전자기기/에어컨.jpg/전기냉방기(에어컨) 36.3제곱형 기준 1시간 사용/258g\n\
+전자기기/세탁기.jpg/전기세탁기 10kg 기준 1시간 사용/14g\n\
+전자기기/세탁기.jpg/전기드림세탁기 10kg 기준 1시간 사용/204g\n\
+전자기기/식기세척기.jpg/식기세척기 12인용 기준 1시간 사용/266g\n\
+전자기기/전기냉온수기.jpg/전기냉온수기 4L 기준 1시간 사용/28g\n\
+전자기기/전기밥솥.jpg/전기밥솥 10인용 기준 1시간 사용/31g\n\
+전자기기/진공청소기.jpg/전기진공청소기 1200W 기준 1시간 사용/510g\n\
+전자기기/선풍기.jpg/선풍기 35cm 기준 1시간 사용/25g\n\
+전자기기/공기청정기.jpg/공기청정기 26.4제곱 기준 1시간 사용/17g\n\
+전자기기/백열전구.jpg/백열전구 60W형 기준 1시간 사용/25g\n\
+전자기기/형광등.jpg/형광램프 32W형 기준 1시간 사용/14g\n\
+전자기기/3상유도전동기.jpg/3상유도전동기 37kW형 기준 1시간 사용/16,818g\n\
+    \
+    교통수단/고속열차.jpg/고속열차 1km 이동/50g\n\
+    교통수단/버스.png/버스 1km 이동/58g\n\
+    교통수단/지하철.jpg/지하철 1km 이동/60g\n\
+    교통수단/오토바이.jpg/오토바이(가솔린) 1km 이동/145g\n\
+    교통수단/자동차.jpg/자동차(가솔린) 1km 이동/208g";
+    
+    
+    var elect=[];
+    var transit=[];
+    //리스트 변환
+    var str=List.split("\n");
+    for(let i in str){
+      console.log(str[i]+"\n");
+    
+      let part=str[i].split("/");
+      console.log(part[0]+"\n");
+      if(part[0].indexOf("전자기기")!=-1){
+      elect.push({src:"이미지/"+part[0]+"/"+part[1], 
+      detail:part[2], carbon:Number(part[3].split("g")[0])});
+      console.log("2");
+      }
+
+    }
+
+
+
+    
+    console.log(elect.length);
+
+    //테마 순서 셔플(임시로 전기전자부터)
+
+    var shuf=shuffle(elect.length);
+    var index=0;
+    
+    document.getElementById("l_img").src=elect[shuf[index++]].src;
+    document.getElementById("r_img").src=elect[shuf[index++]].src;
+
+
+
+
+    
+
+    function sensorBtnClick(s){
+      if(s=='bigger'){
+
+      }
+      if(s=='smaller'){
+
+      }
+    }
+
+  </script>
 
 </html>
