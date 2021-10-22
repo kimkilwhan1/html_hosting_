@@ -2,8 +2,19 @@
   
   <head>
     <script>
-      const img_p="image/";
+      const img_p="이미지/";
+      var image=[];
+      var src=[];
+      var carbon=[];
 
+      function sensorBtnClick(s){
+        if(s=='bigger'){
+
+        }
+        if(s=='smaller'){
+
+        }
+      }
 
     </script>
     <style>
@@ -29,7 +40,7 @@
       box-sizing: border-box;
     }
     
-    button.btn1 {
+    button.bigger {
       position:absolute;
       top:50%;
       left:70%;
@@ -39,7 +50,7 @@
 
       font-size:large;
     }
-    button.btn2 {
+    button.smaller {
       position:absolute;
       top:70%;
       left:70%;
@@ -56,16 +67,16 @@
   
   <div id="left_image">
   
-    <img src="이미지/전자레인지.png" style="height:100%; width:100%; object-fit:cover;"/>
+    <img src="이미지/전자기기/백열전구.jpg" style="height:100%; width:100%; object-fit:contain;"/>
 
   </div>
 
   <div id="right_image">
   
-    <img src="이미지/냉장고1.jpg" style="height:100%; width:100%; object-fit:cover;"/>
+    <img src="이미지/음식/김치찌개.jpg" style="height:100%; width:100%; object-fit:contain;"/>
 
-    <button class="btn1" type="button" onclick="javascript:sensorBtnClick('btn1');">더 크게</button>
-    <button class="btn2" type="button" onclick="javascript:sensorBtnClick('btn2');">더 작게</button>
+    <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');">더 크게</button>
+    <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');">더 작게</button>
 
   </div>
 
