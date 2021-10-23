@@ -55,7 +55,7 @@
   </style>
 
 </head>
-
+<audio id='correct' src='correct.mp3'></audio> 
 <div>
   <div id="left_image">
 
@@ -235,6 +235,14 @@
 
 
 */
+function play(audio) { 
+    if (audio.paused) { 
+        audio.play(); 
+    }else{ 
+        audio.pause(); 
+        audio.currentTime = 0 
+    } 
+} 
   var is_click = false;
 
   function sensorBtnClick(s) {
@@ -256,7 +264,7 @@
         document.getElementById("answer").src = "이미지/correct.png";
         document.getElementById("answer").style.opacity = 1.0;
         score++;
-
+        play(document.getElementById("correct"));
       }
       else {
         is_out = true;
@@ -269,18 +277,18 @@
       }
 
       setTimeout(function () {
+        
+        document.getElementById("answer").style.opacity = 0;
 
         if (is_out == true) {//게임오버 됐을경우
-
+          
           setTimeout(() => {
-            document.getElementById("answer").style.opacity = 0;
             localStorage.setItem('score',score);
             location.href='gameover.html'
           }, 1000);
         }
         else {
           if (index + 1 < theme.length) {
-            document.getElementById("answer").style.opacity = 0;
 
             document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
             document.getElementById("l_img").src = theme[shuf2[index]].src;
@@ -307,6 +315,9 @@
             }
             else {
               //게임 클리어 (만점)
+              localStorage.setItem('score',"만점");
+              location.href='gameover.html'
+           
             }
 
 

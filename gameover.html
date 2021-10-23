@@ -32,7 +32,11 @@
 
     if(localStorage.getItem('score')){
         var score= localStorage.getItem('score');
+        
+        if(score=="만점"){
+        document.getElementById("score").innerText="내 점수는? 만점!\n축하합니다";
+        }
+        else document.getElementById("score").innerText="내 점수는? "+score+"점!";
     }
-    document.getElementById("score").innerText="내 점수는? "+score+"점!"
     </script>
 </html>
