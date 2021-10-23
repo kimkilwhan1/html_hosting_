@@ -1,108 +1,143 @@
 <html>
-  
-  <head>
-    
-    <style>
-    #left_image{
-      border:5px solid black;
 
-      height:100%;
-      width:50%;
+<head>
 
-      position:relative;
-      float:left;
+  <style>
+    #left_image {
+      border: 5px solid black;
+
+      height: 100%;
+      width: 50%;
+
+      position: relative;
+      float: left;
       box-sizing: border-box;
     }
 
-    #right_image{
-      border:5px solid black;
+    #right_image {
+      border: 5px solid black;
 
-      height:100%;
-      width:50%;
+      height: 100%;
+      width: 50%;
 
-      position:relative;
-      float:left;
+      position: relative;
+      float: left;
       box-sizing: border-box;
     }
-    
+
     button.bigger {
-      position:absolute;
-      top:45%;
-      left:70%;
+      position: absolute;
+      top: 45%;
+      left: 70%;
 
-      width:25%;
-      height:10%;
+      width: 25%;
+      height: 10%;
 
-      font-size:large;
-      border:0;
-      outline:0;
-      background-color:transparent;
+      font-size: large;
+      border: 0;
+      outline: 0;
+      background-color: transparent;
     }
+
     button.smaller {
-      position:absolute;
-      top:65%;
-      left:70%;
+      position: absolute;
+      top: 65%;
+      left: 70%;
 
-      width:25%;
-      height:10%;
+      width: 25%;
+      height: 10%;
 
-      font-size:large;
-      border:0;
-      outline:0;
-      background-color:transparent;
+      font-size: large;
+      border: 0;
+      outline: 0;
+      background-color: transparent;
     }
+  </style>
 
-    </style>
+</head>
 
-  </head>
-  
-  <div>
-    <div id="left_image">
-  
-    <img id="l_img" style="height:100%; width:100%; object-fit:contain;"/>
+<div>
+  <div id="left_image">
+
+    <img id="l_img" style="height:100%; width:100%; object-fit:contain;" />
+    
     <h1 id="l_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-    color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
-    </div>
-
-    <div id="right_image">
-  
-    <img id="r_img" style="height:100%; width:100%; object-fit:contain;"/>
-
-    <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');"><img src="이미지/더크게.jpeg" style="width:100%; height:100%;"/></button>
-    <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');"><img src="이미지/더작게.jpeg" style="width:100%; height:100%;"/></button>
+      color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
     
-    <h1 id="r_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-    color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
-    </div>
-    
-    <img id="answer" src="" style="opacity:0; position:absolute; top:50%; left:50%; width:20%; height:20%; transform:translate(-50%,-50%);"/>
+    <h1 id="l_carbon" style="text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    color:white; position:absolute; top:30%; left:50%; 
+    font-size:80px; transform:translate(-50%,-50%);">???mg</h1>
 
   </div>
-  <script>
+
+  <div id="right_image">
+
+    <img id="r_img" style="height:100%; width:100%; object-fit:contain;" />
+
+    <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');"><img src="이미지/더크게.jpeg"
+        style="width:100%; height:100%;" /></button>
+    
+    <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');"><img src="이미지/더작게.jpeg"
+        style="width:100%; height:100%;" /></button>
+
+    <h1 id="r_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+      color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
+    
+    
+    <h1 id="r_carbon" style="text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    color:white; position:absolute; top:30%; left:50%; 
+    font-size:80px; transform:translate(-50%,-50%);">???mg</h1>
+  </div>
+
+  <img id="answer" src=""
+    style="opacity:0; position:absolute; top:50%; left:50%; width:20%; height:20%; transform:translate(-50%,-50%);" />
+
+</div>
 
 
-    function shuffle(n){//n=length
-      let arr=[];
-      for(let i in arr)
-      arr[i]=-1;
 
-      for(let i=0; i<n; i++){
-        let rand=Math.floor(Math.random()*n);//0~length-1
 
-        arr[i]=rand;
-        for(let j=0; j<i; j++)
-        if(rand==arr[j]){
-         
-          arr[i]=-1;
-          i--;
-          break;}
+<script>
 
-      }
-      console.log(arr);
-      return arr;
+    //function 
+
+    const numberWithCommas=(x)=> x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const changeNum=(dom,num)=> {dom.innerText = numberWithCommas(num)+"mg";}
+    var current=0;
+    
+    function counting(){
+      setInterval(()=>{
+        if(current >= theme[shuf2[index]].carbon)
+        return clearInterval(counting);
+
+        current+=Math.floor(theme[shuf2[index]].carbon/10);
+        document.getElementById("r_carbon").innerText=numberWithCommas(current)+"mg";
+      }, 50);//21번 정도 동작
+      current=0;
     }
+    function shuffle(n) {//n=length
+    let arr = [];
+    for (let i in arr)
+      arr[i] = -1;
 
-    const List="전자기기/냉장고.png/전기냉장고 700L 기준 냉장기능 1시간 사용/44g\n\
+    for (let i = 0; i < n; i++) {
+      let rand = Math.floor(Math.random() * n);//0~length-1
+
+      arr[i] = rand;
+      for (let j = 0; j < i; j++)
+        if (rand == arr[j]) {
+
+          arr[i] = -1;
+          i--;
+          break;
+        }
+
+    }
+    console.log(arr);
+    return arr;
+  }
+
+  const List = "전자기기/냉장고.png/전기냉장고 700L 기준 냉장기능 1시간 사용/44g\n\
 전자기기/냉장고.png/전기냉동고 200L 기준 냉동기능 1시간 사용/50g\n\
 전자기기/김치냉장고.jpg/김치냉장고 200L 기준 1시간 사용/50g\n\
 전자기기/에어컨.jpg/전기냉방기(에어컨) 36.3제곱형 기준 1시간 사용/258g\n\
@@ -144,93 +179,123 @@
 식품/된장국.jpg/된장국 1인분/0.22g\n\
 식품/깍두기.jpg/깍두기 1인분/0.07g\n\
 식품/김치찌개.jpg/김치찌개 1인분/0.58g";
-    
-    var rand=["전자기기","교통수단","식품","기타"];
-    var img={
-      "전자기기":[],
-      "교통수단":[],
-      "식품":[],
-      "기타":[]
-    };
 
-    //리스트 변환
-    var str=List.split("\n");
-    for(let i in str){
-      let part=str[i].split("/");
-      img[part[0]].push({src:"이미지/"+part[0]+"/"+part[1], 
-      detail:part[2], carbon:Number(part[3].split("g")[0])});
+  var rand = ["전자기기", "교통수단", "식품", "기타"];
+  var img = {
+    "전자기기": [],
+    "교통수단": [],
+    "식품": [],
+    "기타": []
+  };
+
+  //리스트 변환
+  var str = List.split("\n");
+  for (let i in str) {
+    let part = str[i].split("/");
+    img[part[0]].push({
+      src: "이미지/" + part[0] + "/" + part[1],
+      detail: part[2], carbon: Number(part[3].split("g")[0])*1000
+    });
+  }
+
+  var shuf1 = Object.assign({}, shuffle(rand.length));
+  var theme_idx = 0;
+  var theme = img[rand[shuf1[theme_idx]]];
+
+  console.log(theme);
+
+  //테마 순서 셔플
+
+  var shuf2 = Object.assign({}, shuffle(theme.length));
+  var index = 0;
+
+  document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
+  document.getElementById("l_img").src = theme[shuf2[index]].src;
+  document.getElementById("l_carbon").innerText=numberWithCommas(theme[shuf2[index]].carbon)+"mg";
+
+  index++;
+  document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
+  document.getElementById("r_img").src = theme[shuf2[index]].src;
+
+
+
+
+
+
+  function sensorBtnClick(s) {
+    var is_out = false;
+
+    //오른쪽 숫자 카운팅하기 *1000 mg->g
+    
+
+
+    if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon) {
+      document.getElementById("answer").src = "이미지/correct.png";
+      document.getElementById("answer").style.opacity = 1.0;
+      counting();
+    }
+    else if (s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
+
+      document.getElementById("answer").src = "이미지/correct.png";
+      document.getElementById("answer").style.opacity = 1.0;
+      counting();
+    }
+    else {
+      is_out = true;
+      counting();
+      document.getElementById("answer").src = "이미지/incorrect.png";
+      setTimeout(() => { document.getElementById("answer").style.opacity = 1.0; }, 200);
+      
     }
 
-    var shuf1=Object.assign({}, shuffle(rand.length));
-    var theme_idx=0;
-    var theme=img[rand[shuf1[theme_idx]]];
+    setTimeout(function () {
 
-    console.log(theme);
-
-    //테마 순서 셔플
-
-    var shuf2=Object.assign({}, shuffle(theme.length));
-    var index=0;
-    
-    document.getElementById("l_txt").innerText=theme[shuf2[index]].detail;
-    document.getElementById("l_img").src=theme[shuf2[index]].src;
-    index++;
-    document.getElementById("r_txt").innerText=theme[shuf2[index]].detail;
-    document.getElementById("r_img").src=theme[shuf2[index]].src;
-
-
-    
-
-    function sensorBtnClick(s){
-      if(s=='bigger' && theme[shuf2[index-1]].carbon <= theme[shuf2[index]].carbon){
-        document.getElementById("answer").src="이미지/correct.png";
-        document.getElementById("answer").style.opacity=1.0;
-      }
-      else if(s=='smaller' && theme[shuf2[index-1]].carbon >= theme[shuf2[index]].carbon){
+      if (is_out == true) {//게임오버 됐을경우
         
-        document.getElementById("answer").src="이미지/correct.png";
-        document.getElementById("answer").style.opacity=1.0;
+        setTimeout(() => {
+        document.getElementById("answer").style.opacity = 0;
+        index = rand.length;
+        theme_idx = theme.length;
+        location.href = 'MainPage.html';
+        }, 2000);
       }
-      else{
-        document.getElementById("answer").src="이미지/incorrect.png";
-        document.getElementById("answer").style.opacity=1.0;
-        setTimeout(function(){
-        index=rand.length;
-        theme_idx=theme.length;
-        location.href='MainPage.html'
-        },2000);
-      }
+      else {
+        if (index + 1 < theme.length) {
+          document.getElementById("answer").style.opacity = 0;
 
-      setTimeout(function(){
-      document.getElementById("answer").style.opacity=0;
-      if(index+1 < theme.length){
-        document.getElementById("l_txt").innerText=theme[shuf2[index]].detail;
-        document.getElementById("l_img").src=theme[shuf2[index]].src;
-        index++;
-        document.getElementById("r_txt").innerText=theme[shuf2[index]].detail;
-        document.getElementById("r_img").src=theme[shuf2[index]].src;
-      }
-
-      else{
-        if(theme_idx+1 < rand.length){
-          index=0;
-          theme_idx++;
-          theme=img[rand[shuf1[theme_idx]]];
-          shuf2=Object.assign({}, shuffle(theme.length));
-          document.getElementById("l_txt").innerText=theme[shuf2[index]].detail;
-          document.getElementById("l_img").src=theme[shuf2[index]].src;
+          document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
+          document.getElementById("l_img").src = theme[shuf2[index]].src;
+          document.getElementById("l_carbon").innerText=numberWithCommas(theme[shuf2[index]].carbon)+"mg";
           index++;
-          document.getElementById("r_txt").innerText=theme[shuf2[index]].detail;
-          document.getElementById("r_img").src=theme[shuf2[index]].src;
+          document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
+          document.getElementById("r_img").src = theme[shuf2[index]].src;
+          document.getElementById("r_carbon").innerText="???mg";
         }
-        else {
-          //게임 클리어 (만점)
-        }
-      }
-      }, 2000);
-      
-      }
 
-  </script>
+        else
+          if (theme_idx + 1 < rand.length) {
+            index = 0;
+            theme_idx++;
+            theme = img[rand[shuf1[theme_idx]]];
+            shuf2 = Object.assign({}, shuffle(theme.length));
+            document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
+            document.getElementById("l_img").src = theme[shuf2[index]].src;
+            document.getElementById("l_carbon").innerText=numberWithCommas(theme[shuf2[index]].carbon)+"mg";
+            index++;
+            document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
+            document.getElementById("r_img").src = theme[shuf2[index]].src;
+            document.getElementById("r_carbon").innerText="???mg";
+          }
+          else {
+            //게임 클리어 (만점)
+          }
+        
+
+      }
+    }, 3000);
+
+  }
+
+</script>
 
 </html>
