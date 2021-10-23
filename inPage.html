@@ -30,20 +30,26 @@
       top:50%;
       left:70%;
 
-      width:20%;
+      width:25%;
       height:10%;
 
       font-size:large;
+      border:0;
+      outline:0;
+      background-color:transparent;
     }
     button.smaller {
       position:absolute;
       top:70%;
       left:70%;
 
-      width:20%;
+      width:25%;
       height:10%;
 
       font-size:large;
+      border:0;
+      outline:0;
+      background-color:transparent;
     }
 
     </style>
@@ -53,16 +59,19 @@
   <div id="left_image">
   
     <img id="l_img" src="이미지/전자기기/백열전구.jpg" style="height:100%; width:100%; object-fit:contain;"/>
-
+    <h1 id="l_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
   </div>
 
   <div id="right_image">
   
     <img id="r_img" src="이미지/음식/김치찌개.jpg" style="height:100%; width:100%; object-fit:contain;"/>
 
-    <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');">더 크게</button>
-    <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');">더 작게</button>
-
+    <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');"><img src="이미지/더크게.jpeg" style="width:100%; height:100%;"/></button>
+    <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');"><img src="이미지/더작게.jpeg" style="width:100%; height:100%;"/></button>
+    
+    <h1 id="r_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
   </div>
   <script>
     function shuffle(n){//n=length
@@ -83,7 +92,6 @@
 
       }
 
-      console.log(arr);
       return arr;
     }
 
@@ -115,14 +123,12 @@
     //리스트 변환
     var str=List.split("\n");
     for(let i in str){
-      console.log(str[i]+"\n");
     
       let part=str[i].split("/");
-      console.log(part[0]+"\n");
+      
       if(part[0].indexOf("전자기기")!=-1){
       elect.push({src:"이미지/"+part[0]+"/"+part[1], 
       detail:part[2], carbon:Number(part[3].split("g")[0])});
-      console.log("2");
       }
 
     }
@@ -137,9 +143,11 @@
     var shuf=shuffle(elect.length);
     var index=0;
     
+    document.getElementById("l_txt").innerText=elect[shuf[index]].detail;
     document.getElementById("l_img").src=elect[shuf[index++]].src;
+    
+    document.getElementById("r_txt").innerText=elect[shuf[index]].detail;
     document.getElementById("r_img").src=elect[shuf[index++]].src;
-
 
 
 
