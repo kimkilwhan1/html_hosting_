@@ -60,10 +60,10 @@
   <div id="left_image">
 
     <img id="l_img" style="height:100%; width:100%; object-fit:contain;" />
-    
+
     <h1 id="l_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
       color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
-    
+
     <h1 id="l_carbon" style="text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
     color:white; position:absolute; top:30%; left:50%; 
     font-size:80px; transform:translate(-50%,-50%);">???mg</h1>
@@ -76,14 +76,14 @@
 
     <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');"><img src="이미지/더크게.jpeg"
         style="width:100%; height:100%;" /></button>
-    
+
     <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');"><img src="이미지/더작게.jpeg"
         style="width:100%; height:100%;" /></button>
 
     <h1 id="r_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
       color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
-    
-    
+
+
     <h1 id="r_carbon" style="text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
     color:white; position:absolute; top:30%; left:50%; 
     font-size:80px; transform:translate(-50%,-50%);">???mg</h1>
@@ -99,23 +99,14 @@
 
 <script>
 
-    //function 
+  //function 
 
-    const numberWithCommas=(x)=> x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    const changeNum=(dom,num)=> {dom.innerText = numberWithCommas(num)+"mg";}
-    var current=0;
-    
-    function counting(){
-      setInterval(()=>{
-        if(current >= theme[shuf2[index]].carbon)
-        return clearInterval(counting);
+  const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const changeNum = (dom, num) => { dom.innerText = numberWithCommas(num) + "mg"; }
 
-        current+=Math.floor(theme[shuf2[index]].carbon/10);
-        document.getElementById("r_carbon").innerText=numberWithCommas(current)+"mg";
-      }, 50);//21번 정도 동작
-      current=0;
-    }
-    function shuffle(n) {//n=length
+
+
+  function shuffle(n) {//n=length
     let arr = [];
     for (let i in arr)
       arr[i] = -1;
@@ -151,7 +142,7 @@
 전자기기/공기청정기.jpg/공기청정기 26.4제곱 기준 1시간 사용/17g\n\
 전자기기/백열전구.jpg/백열전구 60W형 기준 1시간 사용/25g\n\
 전자기기/형광등.jpg/형광램프 32W형 기준 1시간 사용/14g\n\
-전자기기/3상유도전동기.jpg/3상유도전동기 37kW형 기준 1시간 사용/16,818g\n\
+전자기기/3상유도전동기.jpg/3상유도전동기 37kW형 기준 1시간 사용/16818g\n\
 교통수단/고속열차.jpg/고속열차 1km 이동/50g\n\
 교통수단/버스.png/버스 1km 이동/58g\n\
 교통수단/지하철.jpg/지하철 1km 이동/60g\n\
@@ -163,7 +154,6 @@
 전자기기/TV.jpg/TV 2시간 시청/129g\n\
 전자기기/헤어드라이기.jpg/전기냉장고 5분 이용/43g\n\
 기타/화장실.jpg/화장실 1회 이용/76g\n\
-전자기기/전기밥솥.jpg/전기밥솥 1시간 이용/752g\n\
 전자기기/세탁기.jpg/세탁기 1시간 이용/791g\n\
 전자기기/형광등.jpg/형광등 10시간 이용/103g\n\
 식품/쌀밥.jpg/쌀밥 1인분/0.11g\n\
@@ -194,7 +184,7 @@
     let part = str[i].split("/");
     img[part[0]].push({
       src: "이미지/" + part[0] + "/" + part[1],
-      detail: part[2], carbon: Number(part[3].split("g")[0])*1000
+      detail: part[2], carbon: Number(part[3].split("g")[0]) * 1000
     });
   }
 
@@ -211,7 +201,7 @@
 
   document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
   document.getElementById("l_img").src = theme[shuf2[index]].src;
-  document.getElementById("l_carbon").innerText=numberWithCommas(theme[shuf2[index]].carbon)+"mg";
+  document.getElementById("l_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
 
   index++;
   document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
@@ -219,81 +209,112 @@
 
 
 
-
-
-
-  function sensorBtnClick(s) {
-    var is_out = false;
-
-    //오른쪽 숫자 카운팅하기 *1000 mg->g
-    
-
-
-    if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon) {
-      document.getElementById("answer").src = "이미지/correct.png";
-      document.getElementById("answer").style.opacity = 1.0;
-      counting();
-    }
-    else if (s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
-
-      document.getElementById("answer").src = "이미지/correct.png";
-      document.getElementById("answer").style.opacity = 1.0;
-      counting();
-    }
-    else {
-      is_out = true;
-      counting();
-      document.getElementById("answer").src = "이미지/incorrect.png";
-      setTimeout(() => { document.getElementById("answer").style.opacity = 1.0; }, 200);
-      
-    }
-
-    setTimeout(function () {
-
-      if (is_out == true) {//게임오버 됐을경우
-        
-        setTimeout(() => {
-        document.getElementById("answer").style.opacity = 0;
-        index = rand.length;
-        theme_idx = theme.length;
-        location.href = 'MainPage.html';
-        }, 2000);
-      }
-      else {
-        if (index + 1 < theme.length) {
-          document.getElementById("answer").style.opacity = 0;
-
-          document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
-          document.getElementById("l_img").src = theme[shuf2[index]].src;
-          document.getElementById("l_carbon").innerText=numberWithCommas(theme[shuf2[index]].carbon)+"mg";
-          index++;
-          document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
-          document.getElementById("r_img").src = theme[shuf2[index]].src;
-          document.getElementById("r_carbon").innerText="???mg";
+/*
+  var current = 0;
+  var flag = false;
+  
+  const counting = (num) => {
+    setInterval(() => {
+      if (flag == false) {
+        if (current >= num) {
+          document.getElementById("r_carbon").innerText = numberWithCommas(num) + "mg";
+          flag = true;
+          return clearInterval(counting);
         }
 
-        else
-          if (theme_idx + 1 < rand.length) {
-            index = 0;
-            theme_idx++;
-            theme = img[rand[shuf1[theme_idx]]];
-            shuf2 = Object.assign({}, shuffle(theme.length));
+        else {
+          document.getElementById("r_carbon").innerText = numberWithCommas(current) + "mg";
+
+          current += Math.floor(num / 10);
+        }
+      }
+
+    }, 100);//11번 정도 동작
+  }
+
+
+*/
+  var is_click = false;
+
+  function sensorBtnClick(s) {
+
+    if (is_click == false) {
+      var is_out = false;
+      is_click = true;
+
+      //오른쪽 숫자 카운팅하기 *1000 mg->g
+      //current = 0;
+      //console.log(current);
+      //counting(theme[shuf2[index]].carbon);
+      //console.log(current);
+      document.getElementById("r_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
+
+
+      if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon) {
+        document.getElementById("answer").src = "이미지/correct.png";
+        document.getElementById("answer").style.opacity = 1.0;
+
+      }
+      else if (s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
+
+        document.getElementById("answer").src = "이미지/correct.png";
+        document.getElementById("answer").style.opacity = 1.0;
+
+      }
+      else {
+        is_out = true;
+
+        document.getElementById("answer").src = "이미지/incorrect.png";
+        setTimeout(() => { document.getElementById("answer").style.opacity = 1.0; }, 200);
+
+      }
+
+      setTimeout(function () {
+
+        if (is_out == true) {//게임오버 됐을경우
+
+          setTimeout(() => {
+            document.getElementById("answer").style.opacity = 0;
+            //location.href = 'MainPage.html';
+          }, 1000);
+        }
+        else {
+          if (index + 1 < theme.length) {
+            document.getElementById("answer").style.opacity = 0;
+
             document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
             document.getElementById("l_img").src = theme[shuf2[index]].src;
-            document.getElementById("l_carbon").innerText=numberWithCommas(theme[shuf2[index]].carbon)+"mg";
+            document.getElementById("l_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
             index++;
             document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
             document.getElementById("r_img").src = theme[shuf2[index]].src;
-            document.getElementById("r_carbon").innerText="???mg";
+            document.getElementById("r_carbon").innerText = "???mg";
           }
-          else {
-            //게임 클리어 (만점)
-          }
-        
 
-      }
-    }, 3000);
+          else
+            if (theme_idx + 1 < rand.length) {
+              index = 0;
+              theme_idx++;
+              theme = img[rand[shuf1[theme_idx]]];
+              shuf2 = Object.assign({}, shuffle(theme.length));
+              document.getElementById("l_txt").innerText = theme[shuf2[index]].detail;
+              document.getElementById("l_img").src = theme[shuf2[index]].src;
+              document.getElementById("l_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
+              index++;
+              document.getElementById("r_txt").innerText = theme[shuf2[index]].detail;
+              document.getElementById("r_img").src = theme[shuf2[index]].src;
+              document.getElementById("r_carbon").innerText = "???mg";
+            }
+            else {
+              //게임 클리어 (만점)
+            }
 
+
+        }
+
+        is_click = false;
+      }, 2000);
+    }
   }
 
 </script>
