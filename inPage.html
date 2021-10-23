@@ -170,6 +170,7 @@
 식품/깍두기.jpg/깍두기 1인분/0.07g\n\
 식품/김치찌개.jpg/김치찌개 1인분/0.58g";
 
+  var score=0;
   var rand = ["전자기기", "교통수단", "식품", "기타"];
   var img = {
     "전자기기": [],
@@ -250,22 +251,20 @@
       document.getElementById("r_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
 
 
-      if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon) {
+      if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon ||
+      s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
         document.getElementById("answer").src = "이미지/correct.png";
         document.getElementById("answer").style.opacity = 1.0;
-
-      }
-      else if (s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
-
-        document.getElementById("answer").src = "이미지/correct.png";
-        document.getElementById("answer").style.opacity = 1.0;
+        score++;
 
       }
       else {
         is_out = true;
 
         document.getElementById("answer").src = "이미지/incorrect.png";
-        setTimeout(() => { document.getElementById("answer").style.opacity = 1.0; }, 200);
+        setTimeout(() => { document.getElementById("answer").style.opacity = 1.0;
+      
+        }, 200);
 
       }
 
@@ -275,7 +274,8 @@
 
           setTimeout(() => {
             document.getElementById("answer").style.opacity = 0;
-            //location.href = 'MainPage.html';
+            localStorage.setItem('score',score);
+            location.href='gameover.html'
           }, 1000);
         }
         else {
