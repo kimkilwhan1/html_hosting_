@@ -56,6 +56,8 @@
 
 </head>
 <audio id='correct' src='correct.mp3'></audio> 
+
+<audio id='incorrect' src='incorrect.wav'></audio> 
 <div>
   <div id="left_image">
 
@@ -152,7 +154,7 @@
 전자기기/노트북.jpg/노트북 10시간 이용/258g\n\
 기타/샤워.jpg/샤워 15분/86g\n\
 전자기기/TV.jpg/TV 2시간 시청/129g\n\
-전자기기/헤어드라이기.jpg/전기냉장고 5분 이용/43g\n\
+전자기기/헤어드라이기.jpg/헤어드라이기 5분 이용/43g\n\
 기타/화장실.jpg/화장실 1회 이용/76g\n\
 전자기기/세탁기.jpg/세탁기 1시간 이용/791g\n\
 전자기기/형광등.jpg/형광등 10시간 이용/103g\n\
@@ -268,6 +270,8 @@ function play(audio) {
       }
       else {
         is_out = true;
+        
+        play(document.getElementById("incorrect"));
 
         document.getElementById("answer").src = "이미지/incorrect.png";
         setTimeout(() => { document.getElementById("answer").style.opacity = 1.0;
