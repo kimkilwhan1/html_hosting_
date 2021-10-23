@@ -27,7 +27,7 @@
     
     button.bigger {
       position:absolute;
-      top:50%;
+      top:45%;
       left:70%;
 
       width:25%;
@@ -40,7 +40,7 @@
     }
     button.smaller {
       position:absolute;
-      top:70%;
+      top:65%;
       left:70%;
 
       width:25%;
@@ -56,24 +56,31 @@
 
   </head>
   
-  <div id="left_image">
+  <div>
+    <div id="left_image">
   
-    <img id="l_img" src="이미지/전자기기/백열전구.jpg" style="height:100%; width:100%; object-fit:contain;"/>
+    <img id="l_img" style="height:100%; width:100%; object-fit:contain;"/>
     <h1 id="l_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
     color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
-  </div>
+    </div>
 
-  <div id="right_image">
+    <div id="right_image">
   
-    <img id="r_img" src="이미지/음식/김치찌개.jpg" style="height:100%; width:100%; object-fit:contain;"/>
+    <img id="r_img" style="height:100%; width:100%; object-fit:contain;"/>
 
     <button class="bigger" type="button" onclick="javascript:sensorBtnClick('bigger');"><img src="이미지/더크게.jpeg" style="width:100%; height:100%;"/></button>
     <button class="smaller" type="button" onclick="javascript:sensorBtnClick('smaller');"><img src="이미지/더작게.jpeg" style="width:100%; height:100%;"/></button>
     
     <h1 id="r_txt" style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
     color:white; position:absolute; top:80%; left:50%; transform:translate(-50%,-50%);"></h1>
+    </div>
+    
+    <img id="answer" src="" style="opacity:0; position:absolute; top:50%; left:50%; width:20%; height:20%; transform:translate(-50%,-50%);"/>
+
   </div>
   <script>
+
+
     function shuffle(n){//n=length
       let arr=[];
       for(let i in arr)
@@ -91,7 +98,7 @@
           break;}
 
       }
-
+      console.log(arr);
       return arr;
     }
 
@@ -99,8 +106,8 @@
 전자기기/냉장고.png/전기냉동고 200L 기준 냉동기능 1시간 사용/50g\n\
 전자기기/김치냉장고.jpg/김치냉장고 200L 기준 1시간 사용/50g\n\
 전자기기/에어컨.jpg/전기냉방기(에어컨) 36.3제곱형 기준 1시간 사용/258g\n\
-전자기기/세탁기.jpg/전기세탁기 10kg 기준 1시간 사용/14g\n\
-전자기기/세탁기.jpg/전기드림세탁기 10kg 기준 1시간 사용/204g\n\
+전자기기/통돌이세탁기.jpg/전기세탁기 10kg 기준 1시간 사용/14g\n\
+전자기기/세탁기.jpg/전기드럼세탁기 10kg 기준 1시간 사용/204g\n\
 전자기기/식기세척기.jpg/식기세척기 12인용 기준 1시간 사용/266g\n\
 전자기기/전기냉온수기.jpg/전기냉온수기 4L 기준 1시간 사용/28g\n\
 전자기기/전기밥솥.jpg/전기밥솥 10인용 기준 1시간 사용/31g\n\
@@ -110,57 +117,119 @@
 전자기기/백열전구.jpg/백열전구 60W형 기준 1시간 사용/25g\n\
 전자기기/형광등.jpg/형광램프 32W형 기준 1시간 사용/14g\n\
 전자기기/3상유도전동기.jpg/3상유도전동기 37kW형 기준 1시간 사용/16,818g\n\
-    \
-    교통수단/고속열차.jpg/고속열차 1km 이동/50g\n\
-    교통수단/버스.png/버스 1km 이동/58g\n\
-    교통수단/지하철.jpg/지하철 1km 이동/60g\n\
-    교통수단/오토바이.jpg/오토바이(가솔린) 1km 이동/145g\n\
-    교통수단/자동차.jpg/자동차(가솔린) 1km 이동/208g";
+교통수단/고속열차.jpg/고속열차 1km 이동/50g\n\
+교통수단/버스.png/버스 1km 이동/58g\n\
+교통수단/지하철.jpg/지하철 1km 이동/60g\n\
+교통수단/오토바이.jpg/오토바이(가솔린) 1km 이동/145g\n\
+교통수단/자동차.jpg/자동차(가솔린) 1km 이동/208g\n\
+기타/종이컵.jpg/일회용컵 1개 사용/11g\n\
+전자기기/노트북.jpg/노트북 10시간 이용/258g\n\
+기타/샤워.jpg/샤워 15분/86g\n\
+전자기기/TV.jpg/TV 2시간 시청/129g\n\
+전자기기/헤어드라이기.jpg/전기냉장고 5분 이용/43g\n\
+기타/화장실.jpg/화장실 1회 이용/76g\n\
+전자기기/전기밥솥.jpg/전기밥솥 1시간 이용/752g\n\
+전자기기/세탁기.jpg/세탁기 1시간 이용/791g\n\
+전자기기/형광등.jpg/형광등 10시간 이용/103g\n\
+식품/쌀밥.jpg/쌀밥 1인분/0.11g\n\
+식품/콩나물.jpg/콩나물 1인분/0.06g\n\
+식품/청국장찌개.jpg/청국장찌개 1인분/0.88g\n\
+식품/오이냉국.jpg/오이냉국 1인분/0.14g\n\
+식품/시금치나물.jpg/시금치나물 1인분/0.13g\n\
+식품/쇠고기무국.png/쇠고기무국 1인분/1.92g\n\
+식품/북어국.jpg/북어국 1인분/0.29g\n\
+식품/배추김치.jpg/배추김치 1인분/0.08g\n\
+식품/미역국.jpg/미역국 1인분/0.66g\n\
+식품/된장찌개.jpg/된장찌개 1인분/0.36g\n\
+식품/된장국.jpg/된장국 1인분/0.22g\n\
+식품/깍두기.jpg/깍두기 1인분/0.07g\n\
+식품/김치찌개.jpg/김치찌개 1인분/0.58g";
     
-    
-    var elect=[];
-    var transit=[];
+    var rand=["전자기기","교통수단","식품","기타"];
+    var img={
+      "전자기기":[],
+      "교통수단":[],
+      "식품":[],
+      "기타":[]
+    };
+
     //리스트 변환
     var str=List.split("\n");
     for(let i in str){
-    
       let part=str[i].split("/");
-      
-      if(part[0].indexOf("전자기기")!=-1){
-      elect.push({src:"이미지/"+part[0]+"/"+part[1], 
+      img[part[0]].push({src:"이미지/"+part[0]+"/"+part[1], 
       detail:part[2], carbon:Number(part[3].split("g")[0])});
-      }
-
     }
 
+    var shuf1=Object.assign({}, shuffle(rand.length));
+    var theme_idx=0;
+    var theme=img[rand[shuf1[theme_idx]]];
 
+    console.log(theme);
 
-    
-    console.log(elect.length);
+    //테마 순서 셔플
 
-    //테마 순서 셔플(임시로 전기전자부터)
-
-    var shuf=shuffle(elect.length);
+    var shuf2=Object.assign({}, shuffle(theme.length));
     var index=0;
     
-    document.getElementById("l_txt").innerText=elect[shuf[index]].detail;
-    document.getElementById("l_img").src=elect[shuf[index++]].src;
-    
-    document.getElementById("r_txt").innerText=elect[shuf[index]].detail;
-    document.getElementById("r_img").src=elect[shuf[index++]].src;
-
+    document.getElementById("l_txt").innerText=theme[shuf2[index]].detail;
+    document.getElementById("l_img").src=theme[shuf2[index]].src;
+    index++;
+    document.getElementById("r_txt").innerText=theme[shuf2[index]].detail;
+    document.getElementById("r_img").src=theme[shuf2[index]].src;
 
 
     
 
     function sensorBtnClick(s){
-      if(s=='bigger'){
-
+      if(s=='bigger' && theme[shuf2[index-1]].carbon <= theme[shuf2[index]].carbon){
+        document.getElementById("answer").src="이미지/correct.png";
+        document.getElementById("answer").style.opacity=1.0;
       }
-      if(s=='smaller'){
-
+      else if(s=='smaller' && theme[shuf2[index-1]].carbon >= theme[shuf2[index]].carbon){
+        
+        document.getElementById("answer").src="이미지/correct.png";
+        document.getElementById("answer").style.opacity=1.0;
       }
-    }
+      else{
+        document.getElementById("answer").src="이미지/incorrect.png";
+        document.getElementById("answer").style.opacity=1.0;
+        setTimeout(function(){
+        index=rand.length;
+        theme_idx=theme.length;
+        location.href='MainPage.html'
+        },2000);
+      }
+
+      setTimeout(function(){
+      document.getElementById("answer").style.opacity=0;
+      if(index+1 < theme.length){
+        document.getElementById("l_txt").innerText=theme[shuf2[index]].detail;
+        document.getElementById("l_img").src=theme[shuf2[index]].src;
+        index++;
+        document.getElementById("r_txt").innerText=theme[shuf2[index]].detail;
+        document.getElementById("r_img").src=theme[shuf2[index]].src;
+      }
+
+      else{
+        if(theme_idx+1 < rand.length){
+          index=0;
+          theme_idx++;
+          theme=img[rand[shuf1[theme_idx]]];
+          shuf2=Object.assign({}, shuffle(theme.length));
+          document.getElementById("l_txt").innerText=theme[shuf2[index]].detail;
+          document.getElementById("l_img").src=theme[shuf2[index]].src;
+          index++;
+          document.getElementById("r_txt").innerText=theme[shuf2[index]].detail;
+          document.getElementById("r_img").src=theme[shuf2[index]].src;
+        }
+        else {
+          //게임 클리어 (만점)
+        }
+      }
+      }, 2000);
+      
+      }
 
   </script>
 
