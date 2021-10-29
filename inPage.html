@@ -150,12 +150,11 @@
 교통수단/지하철.jpg/지하철 1km 이동/60g\n\
 교통수단/오토바이.jpg/오토바이(가솔린) 1km 이동/145g\n\
 교통수단/자동차.jpg/자동차(가솔린) 1km 이동/208g\n\
-기타/종이컵.jpg/일회용컵 1개 사용/11g\n\
 전자기기/노트북.jpg/노트북 10시간 이용/258g\n\
-기타/샤워.jpg/샤워 15분/86g\n\
+물/샤워.jpg/샤워 15분/86g\n\
 전자기기/TV.jpg/TV 2시간 시청/129g\n\
 전자기기/헤어드라이기.jpg/헤어드라이기 5분 이용/43g\n\
-기타/화장실.jpg/화장실 1회 이용/76g\n\
+물/화장실.jpg/화장실 1회 이용/76g\n\
 전자기기/세탁기.jpg/세탁기 1시간 이용/791g\n\
 전자기기/형광등.jpg/형광등 10시간 이용/103g\n\
 식품/쌀밥.jpg/쌀밥 1인분/0.11g\n\
@@ -173,12 +172,12 @@
 식품/김치찌개.jpg/김치찌개 1인분/0.58g";
 
   var score=0;
-  var rand = ["전자기기", "교통수단", "식품", "기타"];
+  var rand = ["전자기기", "교통수단", "식품", "물"];
   var img = {
     "전자기기": [],
     "교통수단": [],
     "식품": [],
-    "기타": []
+    "물": []
   };
 
   //리스트 변환
@@ -288,7 +287,10 @@ function play(audio) {
           
           setTimeout(() => {
             localStorage.setItem('score',score);
-            location.href='gameover.html'
+            localStorage.setItem('theme', rand[shuf1[theme_idx]]);
+            console.log(rand[shuf1[theme_idx]]);
+            
+            location.href='gameover.html';
           }, 1000);
         }
         else {
@@ -320,6 +322,7 @@ function play(audio) {
             else {
               //게임 클리어 (만점)
               localStorage.setItem('score',"만점");
+              localStorage.setItem('theme', rand[shuf1[theme_idx]]);
               location.href='gameover.html'
            
             }

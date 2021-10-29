@@ -9,7 +9,7 @@
         <button type="button" style="top:70%; left:30%; transform:translate(-50%,-50%);" onClick="location.href='reasonwereduce.html'">
             <img src="이미지/if.jpeg" width=100% height=100%/>
         </button>
-        <button type="button" style="width:40%; top:70%; left:70%; transform:translate(-50%,-50%);" onClick="location.href='howcanreduce.html'">
+        <button type="button" style="width:40%; top:70%; left:70%; transform:translate(-50%,-50%);" onClick="func();">
             <img src="이미지/how.jpeg" width=100% height=100%/>
         </button>
         <button type="button" class="start" style="width:20%; top:90%; left:50%; transform:translate(-50%,-50%);" onClick="location.href='inPage.html'">
@@ -29,7 +29,8 @@
         }
     </style>
     <script>
-
+    var theme;
+    
     if(localStorage.getItem('score')){
         var score= localStorage.getItem('score');
         
@@ -37,6 +38,15 @@
         document.getElementById("score").innerText="내 점수는? 만점!\n축하합니다";
         }
         else document.getElementById("score").innerText="내 점수는? "+score+"점!";
+    }
+    if(localStorage.getItem('theme')){
+        theme=localStorage.getItem('theme');
+        console.log(theme);
+    }
+    function func(){
+
+        localStorage.setItem('theme1',theme);
+        location.href='howcanreduce.html';
     }
     </script>
 </html>
