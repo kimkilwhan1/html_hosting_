@@ -214,7 +214,8 @@
 
   var current = 0;
   var num = 0;
-  var flag = false;
+  var s = 0;
+  var is_out=false;
   
 
   
@@ -230,21 +231,22 @@
   } 
   var is_click = false;
 
-  function sensorBtnClick(s) {
+  function sensorBtnClick(select) {
+    s=select;
 
     if (is_click == false) {
-      var is_out = false;
+      is_out = false;
       is_click = true;
 
       //오른쪽 숫자 카운팅하기 *1000 mg->g
-      flag= false;
       num= theme[shuf2[index]].carbon;
       const counting = setInterval(() => {
          if (current >= num) {
             document.getElementById("r_carbon").innerText = numberWithCommas(num) + "mg";
             current=0;
             num=0;
-            flag=true;
+            console.log("flag");
+            ending();
             clearInterval(counting);
             return false;
           }
@@ -263,8 +265,11 @@
       //counting(theme[shuf2[index]].carbon);
       //console.log(current);
       //document.getElementById("r_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
+    }
+  }
 
-      if(flag == true){
+  function ending(){
+    
       if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon ||
       s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
         document.getElementById("answer").src = "이미지/correct.png";
@@ -282,7 +287,8 @@
       
         }, 200);
 
-      }}
+      }
+      
 
       setTimeout(function () {
         
@@ -337,7 +343,7 @@
 
         is_click = false;
       }, 2000);
-    }
+
   }
 
 </script>
