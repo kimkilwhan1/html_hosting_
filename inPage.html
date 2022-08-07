@@ -264,9 +264,9 @@
       //console.log(current);
       document.getElementById("r_carbon").innerText = numberWithCommas(theme[shuf2[index]].carbon) + "mg";
 
-
+      if(flag == true){
       if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon ||
-      s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon && flag == true) {
+      s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
         document.getElementById("answer").src = "이미지/correct.png";
         document.getElementById("answer").style.opacity = 1.0;
         score++;
@@ -282,7 +282,7 @@
       
         }, 200);
 
-      }
+      }}
 
       setTimeout(function () {
         
