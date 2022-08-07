@@ -211,39 +211,23 @@
 
 
 
-/*
+
   var current = 0;
+  var num = 0;
   var flag = false;
   
-  const counting = (num) => {
-    setInterval(() => {
-      if (flag == false) {
-        if (current >= num) {
-          document.getElementById("r_carbon").innerText = numberWithCommas(num) + "mg";
-          flag = true;
-          return clearInterval(counting);
-        }
 
-        else {
-          document.getElementById("r_carbon").innerText = numberWithCommas(current) + "mg";
-
-          current += Math.floor(num / 10);
-        }
-      }
-
-    }, 100);//11번 정도 동작
-  }
+  
 
 
-*/
-function play(audio) { 
-    if (audio.paused) { 
-        audio.play(); 
-    }else{ 
-        audio.pause(); 
-        audio.currentTime = 0 
-    } 
-} 
+  function play(audio) { 
+      if (audio.paused) { 
+          audio.play(); 
+     }else{ 
+          audio.pause(); 
+          audio.currentTime = 0 
+     } 
+  } 
   var is_click = false;
 
   function sensorBtnClick(s) {
@@ -253,6 +237,27 @@ function play(audio) {
       is_click = true;
 
       //오른쪽 숫자 카운팅하기 *1000 mg->g
+      flag= false;
+      num= theme[shuf2[index]].carbon;
+      const counting = setInterval(() => {
+         if (current >= num) {
+            document.getElementById("r_carbon").innerText = numberWithCommas(num) + "mg";
+            current=0;
+            num=0;
+            flag=true;
+            clearInterval(counting);
+            return false;
+          }
+
+          else {
+            document.getElementById("r_carbon").innerText = numberWithCommas(current) + "mg";
+  
+            current += Math.floor(num / 10);
+          }
+        }
+
+      }, 100);//11번 정도 동작
+      
       //current = 0;
       //console.log(current);
       //counting(theme[shuf2[index]].carbon);
@@ -261,7 +266,7 @@ function play(audio) {
 
 
       if (s == 'bigger' && theme[shuf2[index - 1]].carbon <= theme[shuf2[index]].carbon ||
-      s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon) {
+      s == 'smaller' && theme[shuf2[index - 1]].carbon >= theme[shuf2[index]].carbon && flag == true) {
         document.getElementById("answer").src = "이미지/correct.png";
         document.getElementById("answer").style.opacity = 1.0;
         score++;
